@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>AIC Schools</title>
+	<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="css/demo.css" />
+	<link rel="stylesheet" type="text/css" href="css/component.css" />
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>AIC Schools - Login Portal ✨</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<!--[if IE]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+</head>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+	${if chap-id}
+	<form name="sendin" action="$(link-login-only)" method="post">
+		<input type="hidden" name="username" />
+		<input type="hidden" name="password" />
+		<input type="hidden" name="dst" value="$(link-status)" />
+		<input type="hidden" name="popup" value="false" />
+	</form>
+
+	<script type="text/javascript" src="/md5.js"></script>
+	<script type="text/javascript">
+		function doLogin() {
+			document.sendin.username.value = document.login.username.value;
+			document.sendin.password.value = hexMD5('$(chap-id)' + document.login.password.value + '$(chap-challenge)');
+			document.sendin.submit();
+			return false;
+		}
+	</script>
+	${endif}
+
+	<div class="large-header">
+		<!-- Animated Particles -->
+		<div class="particles" id="particles"></div>
+
+		<!-- Login Form -->
+		<div class="login-container">
+			<div class="logo-container">
+				<img src="img/logo.png" alt="AIC Schools Logo">
+				<p class="welcome-text">Welcome Back! 👋</p>
+			</div>
+
+			<form class="login-form" name="login" action="$(link-login-only)" method="post" ${if chap-id}
+				onSubmit="return doLogin()" ${endif}>
+				<input type="hidden" name="dst" value="$(link-status)" />
+				<input type="hidden" name="popup" value="false" />
+
+				<div class="form-group">
+					<i class="fas fa-user form-icon"></i>
+					<input name="username" type="text" value="$(username)" class="form-control" placeholder="Username"
+						required>
+				</div>
+
+				<div class="form-group">
+					<i class="fas fa-lock form-icon"></i>
+					<input type="password" name="password" class="form-control" placeholder="Password" required>
+				</div>
+
+				<div class="error-message">${if error} $(error) ${endif}</div>
+
+				<button type="submit" name="submit" class="login-btn">
+					<i class="fas fa-sign-in-alt"></i> Log In
+				</button>
+			</form>
+
+			<div class="footer">
+				<div class="welcome-banner">
+					<p>✨ Welcome to Ahlubayt Islamic Centre - Where Knowledge Meets Faith ✨</p>
+				</div>
+
+				<p class="social-text">Connect With Us 🌐</p>
+				<div class="social-links">
+					<a href="https://www.facebook.com/ahlulbaytschools/" class="social-link"><i class="fab fa-facebook-f"></i></a>
+					<a href="https://x.com/aicshools/status/1680540952262221829" class="social-link"><i class="fab fa-twitter"></i></a>
+					<a href="https://www.instagram.com/aicschools/" class="social-link"><i class="fab fa-instagram"></i></a>
+					<a href="https://www.youtube.com/@aic-tz" class="social-link"><i class="fab fa-youtube"></i></a>
+					<a href="https://www.youtube.com/@aic-tz" class="social-link"><i class="fas fa-globe"></i></a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Scripts -->
+	<script>
+		// Create floating particles
+		function createParticles() {
+			const particlesContainer = document.getElementById('particles');
+			const particleCount = 50;
+
+			for (let i = 0; i < particleCount; i++) {
+				const particle = document.createElement('div');
+				particle.classList.add('particle');
+
+				// Random size between 3px and 8px
+				const size = Math.random() * 5 + 3;
+				particle.style.width = `${size}px`;
+				particle.style.height = `${size}px`;
+
+				// Random position
+				particle.style.left = `${Math.random() * 100}%`;
+				particle.style.top = `${Math.random() * 100}%`;
+
+				// Random opacity
+				particle.style.opacity = Math.random() * 0.5 + 0.1;
+
+				// Random animation duration between 15s and 30s
+				const duration = Math.random() * 15 + 15;
+				particle.style.animationDuration = `${duration}s`;
+
+				// Random delay
+				particle.style.animationDelay = `${Math.random() * 5}s`;
+
+				particlesContainer.appendChild(particle);
+			}
+		}
+
+		// Focus on username field when page loads
+		document.addEventListener('DOMContentLoaded', function () {
+			document.login.username.focus();
+			createParticles();
+
+			// Add subtle hover effects to form fields
+			const formControls = document.querySelectorAll('.form-control');
+			formControls.forEach(control => {
+				control.addEventListener('focus', function () {
+					this.parentElement.style.transform = 'translateX(5px)';
+				});
+
+				control.addEventListener('blur', function () {
+					this.parentElement.style.transform = 'translateX(0)';
+				});
+			});
+		});
+	</script>
+</body>
+
+</html>
